@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './pages/home/page'
 import Sidebar from './components/Sidebar'
 import MainContent from './components/MainContent'
 import { motion } from 'framer-motion'
@@ -46,7 +48,7 @@ export interface SearchResponse {
   }>
 }
 
-function App() {
+function AppContent() {
   const [retrievalMode, setRetrievalMode] = useState<'vector' | 'graph' | 'hybrid'>('hybrid')
   const [stats, setStats] = useState<Stats | null>(null)
   const [searchResults, setSearchResults] = useState<SearchResponse | null>(null)
@@ -210,4 +212,14 @@ function App() {
   )
 }
 
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/explore" element={<AppContent />} />
+      </Routes>
+    </Router>
+  )
+}
 export default App
