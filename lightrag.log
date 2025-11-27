@@ -1,0 +1,329 @@
+2025-11-27 20:16:57,280 - lightrag - INFO - Creating working directory ./rag_local
+2025-11-27 20:18:16,605 - lightrag - INFO - [_] Process 24340 KV load full_docs with 0 records
+2025-11-27 20:18:16,607 - lightrag - INFO - [_] Process 24340 KV load text_chunks with 0 records
+2025-11-27 20:18:16,607 - lightrag - INFO - [_] Process 24340 KV load full_entities with 0 records
+2025-11-27 20:18:16,607 - lightrag - INFO - [_] Process 24340 KV load full_relations with 0 records
+2025-11-27 20:18:16,611 - lightrag - INFO - [_] Process 24340 KV load entity_chunks with 0 records
+2025-11-27 20:18:16,611 - lightrag - INFO - [_] Process 24340 KV load relation_chunks with 0 records
+2025-11-27 20:18:17,035 - lightrag - INFO - [base] Database chunk-entity-relation at neo4j://localhost:7687 not found. Try to create specified database.
+2025-11-27 20:18:18,218 - lightrag - WARNING - [base] This Neo4j instance does not support creating databases. Try to use Neo4j Desktop/Enterprise version or DozerDB instead. Fallback to use the default database.
+2025-11-27 20:18:19,796 - lightrag - INFO - [base] Connected to None at neo4j://localhost:7687
+2025-11-27 20:18:19,950 - lightrag - INFO - [base] Ensured B-Tree index on entity_id for base in None
+2025-11-27 20:18:20,332 - lightrag - INFO - [base] No existing index 'entity_id_fulltext_idx' found. Creating new index.
+2025-11-27 20:18:20,332 - lightrag - INFO - [base] Creating full-text index 'entity_id_fulltext_idx' with Chinese tokenizer support.
+2025-11-27 20:18:21,028 - lightrag - INFO - [base] Successfully created full-text index 'entity_id_fulltext_idx' with CJK analyzer.
+2025-11-27 20:18:21,031 - lightrag - INFO - [_] Process 24340 KV load llm_response_cache with 0 records
+2025-11-27 20:18:21,032 - lightrag - INFO - [_] Process 24340 doc status load doc_status with 0 records
+2025-11-27 20:18:21,061 - lightrag - INFO - Processing 1 document(s)
+2025-11-27 20:18:21,063 - lightrag - INFO - Extracting stage 1/1: sample_docs/sample.txt
+2025-11-27 20:18:21,064 - lightrag - INFO - Processing d-id: doc-fea1f3c99d5616c3c66fcd2127057f4b
+2025-11-27 20:18:21,155 - lightrag - INFO - Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+2025-11-27 20:18:36,619 - lightrag - INFO - LLM func: 4 new workers initialized (Timeouts: Func: 180s, Worker: 360s, Health Check: 375s)
+2025-11-27 20:18:43,069 - lightrag - ERROR - LLM func: Error in decorated function for task 2133630836864_1800.437: model requires more system memory (5.3 GiB) than is available (2.9 GiB) (status code: 500)
+2025-11-27 20:18:43,070 - lightrag - ERROR - Failed to extract entities and relationships: C[1/1]: chunk-fea1f3c99d5616c3c66fcd2127057f4b: model requires more system memory (5.3 GiB) than is available (2.9 GiB) (status code: -1)
+2025-11-27 20:18:43,224 - lightrag - ERROR - Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\operate.py", line 2932, in _process_with_semaphore
+    return await _process_single_content(chunk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\operate.py", line 2817, in _process_single_content
+    final_result, timestamp = await use_llm_func_with_cache(
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\utils.py", line 1698, in use_llm_func_with_cache
+    res: str = await use_llm_func(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\utils.py", line 847, in wait_func
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\utils.py", line 551, in worker
+    result = await asyncio.wait_for(
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\asyncio\tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\llm\ollama.py", line 135, in ollama_model_complete
+    return await _ollama_model_if_cache(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\tenacity\asyncio\__init__.py", line 189, in async_wrapped
+    return await copy(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\tenacity\asyncio\__init__.py", line 111, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\tenacity\asyncio\__init__.py", line 153, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\tenacity\_utils.py", line 99, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\tenacity\asyncio\__init__.py", line 114, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\llm\ollama.py", line 109, in _ollama_model_if_cache
+    raise e
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\llm\ollama.py", line 72, in _ollama_model_if_cache
+    response = await ollama_client.chat(model=model, messages=messages, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\ollama\_client.py", line 983, in chat
+    return await self._request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\ollama\_client.py", line 767, in _request
+    return cls(**(await self._request_raw(*args, **kwargs)).json())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\ollama\_client.py", line 711, in _request_raw
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: model requires more system memory (5.3 GiB) than is available (2.9 GiB) (status code: 500)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\operate.py", line 2936, in _process_with_semaphore
+    raise prefixed_exception from e
+ollama._types.ResponseError: chunk-fea1f3c99d5616c3c66fcd2127057f4b: model requires more system memory (5.3 GiB) than is available (2.9 GiB) (status code: -1)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\lightrag.py", line 1838, in process_document
+    chunk_results = await entity_relation_task
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\lightrag.py", line 2122, in _process_extract_entities
+    raise e
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\lightrag.py", line 2107, in _process_extract_entities
+    chunk_results = await extract_entities(
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\AppData\Roaming\Python\Python312\site-packages\lightrag\operate.py", line 2978, in extract_entities
+    raise prefixed_exception from first_exception
+ollama._types.ResponseError: C[1/1]: chunk-fea1f3c99d5616c3c66fcd2127057f4b: model requires more system memory (5.3 GiB) than is available (2.9 GiB) (status code: -1)
+
+2025-11-27 20:18:43,226 - lightrag - ERROR - Failed to extract document 1/1: sample_docs/sample.txt
+2025-11-27 20:18:43,236 - lightrag - INFO - Enqueued document processing pipeline stopped
+2025-11-27 20:18:47,056 - lightrag - ERROR - LLM func: Error in decorated function for task 2133029520384_1807.062: model requires more system memory (5.3 GiB) than is available (3.2 GiB) (status code: 500)
+2025-11-27 20:18:47,057 - lightrag - ERROR - Query failed: model requires more system memory (5.3 GiB) than is available (3.2 GiB) (status code: 500)
+2025-11-27 20:18:47,061 - lightrag - INFO - Successfully finalized 12 storages
+2025-11-27 20:20:15,115 - lightrag - INFO - [_] Process 23400 KV load full_docs with 1 records
+2025-11-27 20:20:15,118 - lightrag - INFO - [_] Process 23400 KV load text_chunks with 0 records
+2025-11-27 20:20:15,119 - lightrag - INFO - [_] Process 23400 KV load full_entities with 0 records
+2025-11-27 20:20:15,120 - lightrag - INFO - [_] Process 23400 KV load full_relations with 0 records
+2025-11-27 20:20:15,122 - lightrag - INFO - [_] Process 23400 KV load entity_chunks with 0 records
+2025-11-27 20:20:15,123 - lightrag - INFO - [_] Process 23400 KV load relation_chunks with 0 records
+2025-11-27 20:20:15,257 - lightrag - INFO - [base] Database chunk-entity-relation at neo4j://localhost:7687 not found. Try to create specified database.
+2025-11-27 20:20:15,443 - lightrag - WARNING - [base] This Neo4j instance does not support creating databases. Try to use Neo4j Desktop/Enterprise version or DozerDB instead. Fallback to use the default database.
+2025-11-27 20:20:15,580 - lightrag - INFO - [base] Connected to None at neo4j://localhost:7687
+2025-11-27 20:20:15,674 - lightrag - INFO - [base] Ensured B-Tree index on entity_id for base in None
+2025-11-27 20:20:15,960 - lightrag - INFO - [base] Found existing index 'entity_id_fulltext_idx' with state: ONLINE
+2025-11-27 20:20:15,961 - lightrag - INFO - [base] Full-text index 'entity_id_fulltext_idx' already exists and is online. Skipping recreation.
+2025-11-27 20:20:15,962 - lightrag - INFO - [_] Process 23400 KV load llm_response_cache with 0 records
+2025-11-27 20:20:15,992 - lightrag - INFO - [_] Process 23400 doc status load doc_status with 1 records
+2025-11-27 20:20:15,998 - lightrag - WARNING - Ignoring document ID (already exists): doc-fea1f3c99d5616c3c66fcd2127057f4b (sample_docs/sample.txt)
+2025-11-27 20:20:15,999 - lightrag - WARNING - No new unique documents were found.
+2025-11-27 20:20:16,005 - lightrag - INFO - Reset 1 documents from PROCESSING/FAILED to PENDING status
+2025-11-27 20:20:16,005 - lightrag - INFO - Processing 1 document(s)
+2025-11-27 20:20:16,007 - lightrag - INFO - Extracting stage 1/1: sample_docs/sample.txt
+2025-11-27 20:20:16,008 - lightrag - INFO - Processing d-id: doc-fea1f3c99d5616c3c66fcd2127057f4b
+2025-11-27 20:20:16,055 - lightrag - INFO - Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+2025-11-27 20:20:22,889 - lightrag - INFO - LLM func: 4 new workers initialized (Timeouts: Func: 180s, Worker: 360s, Health Check: 375s)
+2025-11-27 20:20:32,978 - lightrag - INFO -  == LLM cache == saving: default:extract:0ff137dd41ece4737a2ade5e16d30e0c
+2025-11-27 20:20:32,979 - lightrag - WARNING - chunk-fea1f3c99d5616c3c66fcd2127057f4b: Complete delimiter can not be found in extraction result
+2025-11-27 20:20:41,712 - lightrag - INFO -  == LLM cache == saving: default:extract:c46e5e0678a201fcf35c508c780cbb64
+2025-11-27 20:20:41,712 - lightrag - WARNING - chunk-fea1f3c99d5616c3c66fcd2127057f4b: Complete delimiter can not be found in extraction result
+2025-11-27 20:20:41,714 - lightrag - INFO - Chunk 1 of 1 extracted 0 Ent + 0 Rel chunk-fea1f3c99d5616c3c66fcd2127057f4b
+2025-11-27 20:20:41,714 - lightrag - INFO - Merging stage 1/1: sample_docs/sample.txt
+2025-11-27 20:20:41,714 - lightrag - INFO - Phase 1: Processing 0 entities from doc-fea1f3c99d5616c3c66fcd2127057f4b (async: 8)
+2025-11-27 20:20:41,717 - lightrag - INFO - Phase 2: Processing 0 relations from doc-fea1f3c99d5616c3c66fcd2127057f4b (async: 8)
+2025-11-27 20:20:41,718 - lightrag - INFO - Phase 3: Updating final 0(0+0) entities and  0 relations from doc-fea1f3c99d5616c3c66fcd2127057f4b
+2025-11-27 20:20:41,718 - lightrag - INFO - Completed merging: 0 entities, 0 extra entities, 0 relations
+2025-11-27 20:20:41,750 - lightrag - INFO - In memory DB persist to disk
+2025-11-27 20:20:41,751 - lightrag - INFO - Completed processing file 1/1: sample_docs/sample.txt
+2025-11-27 20:20:41,751 - lightrag - INFO - Enqueued document processing pipeline stopped
+2025-11-27 20:20:45,486 - lightrag - WARNING - low_level_keywords is empty
+2025-11-27 20:20:45,487 - lightrag - WARNING - high_level_keywords is empty
+2025-11-27 20:20:45,487 - lightrag - WARNING - Forced low_level_keywords to origin query: What are the key entities and relationships?
+2025-11-27 20:20:47,105 - lightrag - INFO - Query nodes: What are the key entities and relationships? (top_k:20, cosine:0.2)
+2025-11-27 20:20:48,614 - lightrag - INFO - Raw search results: 0 entities, 0 relations, 0 vector chunks
+2025-11-27 20:20:48,616 - lightrag - INFO - [kg_query] No query context could be built; returning no-result.
+2025-11-27 20:20:48,617 - lightrag - INFO - Successfully finalized 12 storages
+2025-11-27 20:21:04,271 - lightrag - INFO - [_] Process 17656 KV load full_docs with 1 records
+2025-11-27 20:21:04,288 - lightrag - INFO - [_] Process 17656 KV load text_chunks with 1 records
+2025-11-27 20:21:04,288 - lightrag - INFO - [_] Process 17656 KV load full_entities with 0 records
+2025-11-27 20:21:04,288 - lightrag - INFO - [_] Process 17656 KV load full_relations with 0 records
+2025-11-27 20:21:04,291 - lightrag - INFO - [_] Process 17656 KV load entity_chunks with 0 records
+2025-11-27 20:21:04,291 - lightrag - INFO - [_] Process 17656 KV load relation_chunks with 0 records
+2025-11-27 20:21:04,395 - lightrag - INFO - [base] Database chunk-entity-relation at neo4j://localhost:7687 not found. Try to create specified database.
+2025-11-27 20:21:04,503 - lightrag - WARNING - [base] This Neo4j instance does not support creating databases. Try to use Neo4j Desktop/Enterprise version or DozerDB instead. Fallback to use the default database.
+2025-11-27 20:21:04,522 - lightrag - INFO - [base] Connected to None at neo4j://localhost:7687
+2025-11-27 20:21:04,533 - lightrag - INFO - [base] Ensured B-Tree index on entity_id for base in None
+2025-11-27 20:21:04,554 - lightrag - INFO - [base] Found existing index 'entity_id_fulltext_idx' with state: ONLINE
+2025-11-27 20:21:04,554 - lightrag - INFO - [base] Full-text index 'entity_id_fulltext_idx' already exists and is online. Skipping recreation.
+2025-11-27 20:21:04,583 - lightrag - INFO - [_] Process 17656 KV load llm_response_cache with 2 records
+2025-11-27 20:21:04,603 - lightrag - INFO - [_] Process 17656 doc status load doc_status with 1 records
+2025-11-27 20:21:35,233 - lightrag - INFO - [_] Process 19704 KV load full_docs with 1 records
+2025-11-27 20:21:35,234 - lightrag - INFO - [_] Process 19704 KV load text_chunks with 1 records
+2025-11-27 20:21:35,235 - lightrag - INFO - [_] Process 19704 KV load full_entities with 0 records
+2025-11-27 20:21:35,237 - lightrag - INFO - [_] Process 19704 KV load full_relations with 0 records
+2025-11-27 20:21:35,238 - lightrag - INFO - [_] Process 19704 KV load entity_chunks with 0 records
+2025-11-27 20:21:35,239 - lightrag - INFO - [_] Process 19704 KV load relation_chunks with 0 records
+2025-11-27 20:21:35,334 - lightrag - INFO - [base] Database chunk-entity-relation at neo4j://localhost:7687 not found. Try to create specified database.
+2025-11-27 20:21:35,438 - lightrag - WARNING - [base] This Neo4j instance does not support creating databases. Try to use Neo4j Desktop/Enterprise version or DozerDB instead. Fallback to use the default database.
+2025-11-27 20:21:35,453 - lightrag - INFO - [base] Connected to None at neo4j://localhost:7687
+2025-11-27 20:21:35,465 - lightrag - INFO - [base] Ensured B-Tree index on entity_id for base in None
+2025-11-27 20:21:35,488 - lightrag - INFO - [base] Found existing index 'entity_id_fulltext_idx' with state: ONLINE
+2025-11-27 20:21:35,489 - lightrag - INFO - [base] Full-text index 'entity_id_fulltext_idx' already exists and is online. Skipping recreation.
+2025-11-27 20:21:35,492 - lightrag - INFO - [_] Process 19704 KV load llm_response_cache with 2 records
+2025-11-27 20:21:35,493 - lightrag - INFO - [_] Process 19704 doc status load doc_status with 1 records
+2025-11-27 20:21:35,542 - lightrag - INFO - LLM func: 4 new workers initialized (Timeouts: Func: 180s, Worker: 360s, Health Check: 375s)
+2025-11-27 20:21:38,845 - lightrag - INFO -  == LLM cache == saving: hybrid:keywords:680bd82cba4e15dec9c40f65fecd03de
+2025-11-27 20:21:40,311 - lightrag - INFO - Query nodes: Entity, Relationship, Subject, Object, Description, Key terms, Phrases (top_k:20, cosine:0.2)
+2025-11-27 20:21:40,312 - lightrag - INFO - Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+2025-11-27 20:21:41,817 - lightrag - INFO - Query edges: Entities (top_k:20, cosine:0.2)
+2025-11-27 20:21:43,460 - lightrag - INFO - Raw search results: 0 entities, 0 relations, 0 vector chunks
+2025-11-27 20:21:43,460 - lightrag - INFO - [kg_query] No query context could be built; returning no-result.
+2025-11-27 20:21:43,465 - lightrag - INFO - Successfully finalized 12 storages
+2025-11-27 21:32:08,542 - lightrag - INFO - [_] Process 29384 KV load full_docs with 1 records
+2025-11-27 21:32:08,543 - lightrag - INFO - [_] Process 29384 KV load text_chunks with 1 records
+2025-11-27 21:32:08,544 - lightrag - INFO - [_] Process 29384 KV load full_entities with 0 records
+2025-11-27 21:32:08,546 - lightrag - INFO - [_] Process 29384 KV load full_relations with 0 records
+2025-11-27 21:32:08,548 - lightrag - INFO - [_] Process 29384 KV load entity_chunks with 0 records
+2025-11-27 21:32:08,548 - lightrag - INFO - [_] Process 29384 KV load relation_chunks with 0 records
+2025-11-27 21:32:08,672 - lightrag - INFO - [base] Database chunk-entity-relation at neo4j://localhost:7687 not found. Try to create specified database.
+2025-11-27 21:32:08,802 - lightrag - WARNING - [base] This Neo4j instance does not support creating databases. Try to use Neo4j Desktop/Enterprise version or DozerDB instead. Fallback to use the default database.
+2025-11-27 21:32:08,817 - lightrag - INFO - [base] Connected to None at neo4j://localhost:7687
+2025-11-27 21:32:08,828 - lightrag - INFO - [base] Ensured B-Tree index on entity_id for base in None
+2025-11-27 21:32:08,851 - lightrag - INFO - [base] Found existing index 'entity_id_fulltext_idx' with state: ONLINE
+2025-11-27 21:32:08,852 - lightrag - INFO - [base] Full-text index 'entity_id_fulltext_idx' already exists and is online. Skipping recreation.
+2025-11-27 21:32:08,882 - lightrag - INFO - [_] Process 29384 KV load llm_response_cache with 3 records
+2025-11-27 21:32:08,884 - lightrag - INFO - [_] Process 29384 doc status load doc_status with 1 records
+2025-11-27 21:32:08,961 - lightrag - INFO - Processing 1 document(s)
+2025-11-27 21:32:08,962 - lightrag - INFO - Extracting stage 1/1: random_data_chunk
+2025-11-27 21:32:08,963 - lightrag - INFO - Processing d-id: doc-b868aa83dba5ea4024468067490a6fb2
+2025-11-27 21:32:08,993 - lightrag - INFO - Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+2025-11-27 21:32:15,008 - lightrag - INFO - LLM func: 4 new workers initialized (Timeouts: Func: 180s, Worker: 360s, Health Check: 375s)
+2025-11-27 21:32:25,939 - lightrag - INFO -  == LLM cache == saving: default:extract:6ea7734dceacb19b25944f514eae2bd6
+2025-11-27 21:32:33,729 - lightrag - INFO -  == LLM cache == saving: default:extract:430690fd203b8b22dd7657db31db4ca1
+2025-11-27 21:32:33,729 - lightrag - INFO - Chunk 1 of 1 extracted 0 Ent + 0 Rel chunk-b868aa83dba5ea4024468067490a6fb2
+2025-11-27 21:32:33,731 - lightrag - INFO - Merging stage 1/1: random_data_chunk
+2025-11-27 21:32:33,731 - lightrag - INFO - Phase 1: Processing 0 entities from doc-b868aa83dba5ea4024468067490a6fb2 (async: 8)
+2025-11-27 21:32:33,731 - lightrag - INFO - Phase 2: Processing 0 relations from doc-b868aa83dba5ea4024468067490a6fb2 (async: 8)
+2025-11-27 21:32:33,736 - lightrag - INFO - Phase 3: Updating final 0(0+0) entities and  0 relations from doc-b868aa83dba5ea4024468067490a6fb2
+2025-11-27 21:32:33,737 - lightrag - INFO - Completed merging: 0 entities, 0 extra entities, 0 relations
+2025-11-27 21:32:33,756 - lightrag - INFO - In memory DB persist to disk
+2025-11-27 21:32:33,757 - lightrag - INFO - Completed processing file 1/1: random_data_chunk
+2025-11-27 21:32:33,758 - lightrag - INFO - Enqueued document processing pipeline stopped
+2025-11-27 21:32:33,763 - lightrag - INFO - Processing 1 document(s)
+2025-11-27 21:32:33,764 - lightrag - INFO - Extracting stage 1/1: random_data_chunk
+2025-11-27 21:32:33,764 - lightrag - INFO - Processing d-id: doc-f0f02d6b6ef8ed26adb82e03f2c5ed5f
+2025-11-27 21:32:41,419 - lightrag - INFO -  == LLM cache == saving: default:extract:fafd91ec2e2a640ce336f47fa048f990
+2025-11-27 21:32:47,662 - lightrag - INFO -  == LLM cache == saving: default:extract:7e558e53090057b81f87c0126bb83790
+2025-11-27 21:32:47,662 - lightrag - INFO - Chunk 1 of 1 extracted 0 Ent + 0 Rel chunk-f0f02d6b6ef8ed26adb82e03f2c5ed5f
+2025-11-27 21:32:47,662 - lightrag - INFO - Merging stage 1/1: random_data_chunk
+2025-11-27 21:32:47,666 - lightrag - INFO - Phase 1: Processing 0 entities from doc-f0f02d6b6ef8ed26adb82e03f2c5ed5f (async: 8)
+2025-11-27 21:32:47,668 - lightrag - INFO - Phase 2: Processing 0 relations from doc-f0f02d6b6ef8ed26adb82e03f2c5ed5f (async: 8)
+2025-11-27 21:32:47,668 - lightrag - INFO - Phase 3: Updating final 0(0+0) entities and  0 relations from doc-f0f02d6b6ef8ed26adb82e03f2c5ed5f
+2025-11-27 21:32:47,669 - lightrag - INFO - Completed merging: 0 entities, 0 extra entities, 0 relations
+2025-11-27 21:32:47,681 - lightrag - INFO - In memory DB persist to disk
+2025-11-27 21:32:47,681 - lightrag - INFO - Completed processing file 1/1: random_data_chunk
+2025-11-27 21:32:47,684 - lightrag - INFO - Enqueued document processing pipeline stopped
+2025-11-27 21:32:47,688 - lightrag - INFO - Processing 1 document(s)
+2025-11-27 21:32:47,691 - lightrag - INFO - Extracting stage 1/1: random_data_chunk
+2025-11-27 21:32:47,691 - lightrag - INFO - Processing d-id: doc-ad8a80e7657afc001e52c9959bf33156
+2025-11-27 21:32:58,463 - lightrag - INFO -  == LLM cache == saving: default:extract:1a03696b9b7e1ff3a7077ef2d8ab7b29
+2025-11-27 21:32:58,463 - lightrag - WARNING - chunk-ad8a80e7657afc001e52c9959bf33156: Complete delimiter can not be found in extraction result
+2025-11-27 21:33:02,603 - lightrag - INFO -  == LLM cache == saving: default:extract:a9e17671e241c6863f592f0c6827385e
+2025-11-27 21:33:02,603 - lightrag - WARNING - chunk-ad8a80e7657afc001e52c9959bf33156: Complete delimiter can not be found in extraction result
+2025-11-27 21:33:02,605 - lightrag - INFO - Chunk 1 of 1 extracted 0 Ent + 0 Rel chunk-ad8a80e7657afc001e52c9959bf33156
+2025-11-27 21:33:02,607 - lightrag - INFO - Merging stage 1/1: random_data_chunk
+2025-11-27 21:33:02,608 - lightrag - INFO - Phase 1: Processing 0 entities from doc-ad8a80e7657afc001e52c9959bf33156 (async: 8)
+2025-11-27 21:33:02,609 - lightrag - INFO - Phase 2: Processing 0 relations from doc-ad8a80e7657afc001e52c9959bf33156 (async: 8)
+2025-11-27 21:33:02,610 - lightrag - INFO - Phase 3: Updating final 0(0+0) entities and  0 relations from doc-ad8a80e7657afc001e52c9959bf33156
+2025-11-27 21:33:02,611 - lightrag - INFO - Completed merging: 0 entities, 0 extra entities, 0 relations
+2025-11-27 21:33:02,626 - lightrag - INFO - In memory DB persist to disk
+2025-11-27 21:33:02,627 - lightrag - INFO - Completed processing file 1/1: random_data_chunk
+2025-11-27 21:33:02,629 - lightrag - INFO - Enqueued document processing pipeline stopped
+2025-11-27 21:33:02,633 - lightrag - INFO - Processing 1 document(s)
+2025-11-27 21:33:02,635 - lightrag - INFO - Extracting stage 1/1: random_data_chunk
+2025-11-27 21:33:02,636 - lightrag - INFO - Processing d-id: doc-78dde540731ccd04eee1cce23ec5bc24
+2025-11-27 21:33:12,128 - lightrag - INFO -  == LLM cache == saving: default:extract:d9b2158ee1099f3c9b04989cce45bd8c
+2025-11-27 21:33:12,128 - lightrag - WARNING - chunk-78dde540731ccd04eee1cce23ec5bc24: Complete delimiter can not be found in extraction result
+2025-11-27 21:33:17,706 - lightrag - INFO -  == LLM cache == saving: default:extract:13974917a0478e268a18476263d1bf89
+2025-11-27 21:33:17,708 - lightrag - WARNING - chunk-78dde540731ccd04eee1cce23ec5bc24: Complete delimiter can not be found in extraction result
+2025-11-27 21:33:17,709 - lightrag - INFO - Chunk 1 of 1 extracted 0 Ent + 0 Rel chunk-78dde540731ccd04eee1cce23ec5bc24
+2025-11-27 21:33:17,710 - lightrag - INFO - Merging stage 1/1: random_data_chunk
+2025-11-27 21:33:17,711 - lightrag - INFO - Phase 1: Processing 0 entities from doc-78dde540731ccd04eee1cce23ec5bc24 (async: 8)
+2025-11-27 21:33:17,712 - lightrag - INFO - Phase 2: Processing 0 relations from doc-78dde540731ccd04eee1cce23ec5bc24 (async: 8)
+2025-11-27 21:33:17,712 - lightrag - INFO - Phase 3: Updating final 0(0+0) entities and  0 relations from doc-78dde540731ccd04eee1cce23ec5bc24
+2025-11-27 21:33:17,714 - lightrag - INFO - Completed merging: 0 entities, 0 extra entities, 0 relations
+2025-11-27 21:33:17,729 - lightrag - INFO - In memory DB persist to disk
+2025-11-27 21:33:17,730 - lightrag - INFO - Completed processing file 1/1: random_data_chunk
+2025-11-27 21:33:17,731 - lightrag - INFO - Enqueued document processing pipeline stopped
+2025-11-27 21:33:17,736 - lightrag - INFO - Processing 1 document(s)
+2025-11-27 21:33:17,738 - lightrag - INFO - Extracting stage 1/1: random_data_chunk
+2025-11-27 21:33:17,739 - lightrag - INFO - Processing d-id: doc-b7306c91c51d82d27796a990b90eb1ee
+2025-11-27 21:33:25,213 - lightrag - INFO -  == LLM cache == saving: default:extract:174edb7b4f20aad1936d0e18242aefdd
+2025-11-27 21:33:25,214 - lightrag - WARNING - chunk-b7306c91c51d82d27796a990b90eb1ee: Complete delimiter can not be found in extraction result
+2025-11-27 21:33:31,749 - lightrag - INFO -  == LLM cache == saving: default:extract:19cfde00b9ba02c889b869d15025942a
+2025-11-27 21:33:31,750 - lightrag - WARNING - chunk-b7306c91c51d82d27796a990b90eb1ee: Complete delimiter can not be found in extraction result
+2025-11-27 21:33:31,752 - lightrag - INFO - Chunk 1 of 1 extracted 0 Ent + 0 Rel chunk-b7306c91c51d82d27796a990b90eb1ee
+2025-11-27 21:33:31,753 - lightrag - INFO - Merging stage 1/1: random_data_chunk
+2025-11-27 21:33:31,754 - lightrag - INFO - Phase 1: Processing 0 entities from doc-b7306c91c51d82d27796a990b90eb1ee (async: 8)
+2025-11-27 21:33:31,755 - lightrag - INFO - Phase 2: Processing 0 relations from doc-b7306c91c51d82d27796a990b90eb1ee (async: 8)
+2025-11-27 21:33:31,756 - lightrag - INFO - Phase 3: Updating final 0(0+0) entities and  0 relations from doc-b7306c91c51d82d27796a990b90eb1ee
+2025-11-27 21:33:31,757 - lightrag - INFO - Completed merging: 0 entities, 0 extra entities, 0 relations
+2025-11-27 21:33:31,772 - lightrag - INFO - In memory DB persist to disk
+2025-11-27 21:33:31,773 - lightrag - INFO - Completed processing file 1/1: random_data_chunk
+2025-11-27 21:33:31,774 - lightrag - INFO - Enqueued document processing pipeline stopped
+2025-11-27 21:33:31,780 - lightrag - INFO - Processing 1 document(s)
+2025-11-27 21:33:31,781 - lightrag - INFO - Extracting stage 1/1: random_data_chunk
+2025-11-27 21:33:31,782 - lightrag - INFO - Processing d-id: doc-3e9f298eca18840711c90b775fefbbdc
+2025-11-27 21:33:51,561 - lightrag - INFO -  == LLM cache == saving: default:extract:df71d997bf760e4d7156eee9d5106ebc
+2025-11-27 21:33:51,562 - lightrag - WARNING - chunk-3e9f298eca18840711c90b775fefbbdc: Complete delimiter can not be found in extraction result
+2025-11-27 21:33:57,509 - lightrag - INFO -  == LLM cache == saving: default:extract:4589be2d30d170e5df8a07b83dc30f2f
+2025-11-27 21:33:57,510 - lightrag - WARNING - chunk-3e9f298eca18840711c90b775fefbbdc: Complete delimiter can not be found in extraction result
+2025-11-27 21:33:57,512 - lightrag - INFO - Chunk 1 of 1 extracted 0 Ent + 0 Rel chunk-3e9f298eca18840711c90b775fefbbdc
+2025-11-27 21:33:57,512 - lightrag - INFO - Merging stage 1/1: random_data_chunk
+2025-11-27 21:33:57,514 - lightrag - INFO - Phase 1: Processing 0 entities from doc-3e9f298eca18840711c90b775fefbbdc (async: 8)
+2025-11-27 21:33:57,514 - lightrag - INFO - Phase 2: Processing 0 relations from doc-3e9f298eca18840711c90b775fefbbdc (async: 8)
+2025-11-27 21:33:57,516 - lightrag - INFO - Phase 3: Updating final 0(0+0) entities and  0 relations from doc-3e9f298eca18840711c90b775fefbbdc
+2025-11-27 21:33:57,517 - lightrag - INFO - Completed merging: 0 entities, 0 extra entities, 0 relations
+2025-11-27 21:33:57,540 - lightrag - INFO - In memory DB persist to disk
+2025-11-27 21:33:57,540 - lightrag - INFO - Completed processing file 1/1: random_data_chunk
+2025-11-27 21:33:57,544 - lightrag - INFO - Enqueued document processing pipeline stopped
+2025-11-27 21:33:57,549 - lightrag - INFO - Processing 1 document(s)
+2025-11-27 21:33:57,549 - lightrag - INFO - Extracting stage 1/1: random_data_chunk
+2025-11-27 21:33:57,551 - lightrag - INFO - Processing d-id: doc-b3910ea621c573dc2a1ba398647596dd
+2025-11-27 21:34:06,146 - lightrag - INFO -  == LLM cache == saving: default:extract:d6daa597cbc9befd4729318c11b2d595
+2025-11-27 21:34:12,295 - lightrag - INFO -  == LLM cache == saving: default:extract:02595a6600dae6d4ea548d9d4d705bcb
+2025-11-27 21:34:12,297 - lightrag - INFO - Chunk 1 of 1 extracted 0 Ent + 0 Rel chunk-b3910ea621c573dc2a1ba398647596dd
+2025-11-27 21:34:12,298 - lightrag - INFO - Merging stage 1/1: random_data_chunk
+2025-11-27 21:34:12,299 - lightrag - INFO - Phase 1: Processing 0 entities from doc-b3910ea621c573dc2a1ba398647596dd (async: 8)
+2025-11-27 21:34:12,301 - lightrag - INFO - Phase 2: Processing 0 relations from doc-b3910ea621c573dc2a1ba398647596dd (async: 8)
+2025-11-27 21:34:12,302 - lightrag - INFO - Phase 3: Updating final 0(0+0) entities and  0 relations from doc-b3910ea621c573dc2a1ba398647596dd
+2025-11-27 21:34:12,303 - lightrag - INFO - Completed merging: 0 entities, 0 extra entities, 0 relations
+2025-11-27 21:34:12,320 - lightrag - INFO - In memory DB persist to disk
+2025-11-27 21:34:12,321 - lightrag - INFO - Completed processing file 1/1: random_data_chunk
+2025-11-27 21:34:12,321 - lightrag - INFO - Enqueued document processing pipeline stopped
+2025-11-27 21:34:13,853 - lightrag - INFO - Query nodes: Entity, Relationship, Subject, Object, Description, Key terms, Phrases (top_k:20, cosine:0.2)
+2025-11-27 21:34:15,467 - lightrag - INFO - Query edges: Entities (top_k:20, cosine:0.2)
+2025-11-27 21:34:17,071 - lightrag - INFO - Raw search results: 0 entities, 0 relations, 0 vector chunks
+2025-11-27 21:34:17,071 - lightrag - INFO - [kg_query] No query context could be built; returning no-result.
+2025-11-27 21:34:17,073 - lightrag - INFO - Successfully finalized 12 storages
+2025-11-27 21:38:45,673 - lightrag - WARNING - [base] This Neo4j instance does not support creating databases. Try to use Neo4j Desktop/Enterprise version or DozerDB instead. Fallback to use the default database.
+2025-11-27 21:39:16,391 - lightrag - WARNING - [base] This Neo4j instance does not support creating databases. Try to use Neo4j Desktop/Enterprise version or DozerDB instead. Fallback to use the default database.
+2025-11-27 21:39:16,466 - lightrag - WARNING - Ignoring document ID (already exists): doc-2fa12f37b2d462de52f2cc638f8b17c9 (unknown_source)
+2025-11-27 21:39:16,467 - lightrag - WARNING - No new unique documents were found.
+2025-11-27 21:39:47,249 - lightrag - WARNING - chunk-8a426ab7cad30f4682091ef0e1959098: Complete delimiter can not be found in extraction result
+2025-11-27 21:39:54,829 - lightrag - WARNING - chunk-8a426ab7cad30f4682091ef0e1959098: Complete delimiter can not be found in extraction result
+2025-11-27 21:40:01,794 - lightrag - WARNING - chunk-8ee62cd0116558b0ca975a80846a49af: Complete delimiter can not be found in extraction result
+2025-11-27 21:40:06,217 - lightrag - WARNING - chunk-8ee62cd0116558b0ca975a80846a49af: Complete delimiter can not be found in extraction result
+2025-11-27 21:40:22,357 - lightrag - WARNING - chunk-c469d8ffc411b278986d538cce7dd986: Complete delimiter can not be found in extraction result
+2025-11-27 21:40:42,407 - lightrag - WARNING - chunk-5b0483711e58d328556f7221afedff64: Complete delimiter can not be found in extraction result
+2025-11-27 21:40:51,567 - lightrag - WARNING - chunk-fd4f44f8549df6b3cb21f2a251f6b0be: Complete delimiter can not be found in extraction result
+2025-11-27 21:40:59,349 - lightrag - WARNING - chunk-fd4f44f8549df6b3cb21f2a251f6b0be: Complete delimiter can not be found in extraction result
+2025-11-27 21:41:06,620 - lightrag - WARNING - chunk-cef943dbc2a06c618d703ea67b76d0ef: Complete delimiter can not be found in extraction result
+2025-11-27 21:41:14,500 - lightrag - WARNING - chunk-cef943dbc2a06c618d703ea67b76d0ef: Complete delimiter can not be found in extraction result
