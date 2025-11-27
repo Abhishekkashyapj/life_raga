@@ -236,8 +236,22 @@ class HybridStorageManager:
         nodes_created = 0
         
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                content = f.read()
+            # Try multiple encodings
+            content = None
+            encodings = ['utf-8', 'utf-8-sig', 'latin-1', 'cp1252', 'iso-8859-1']
+            
+            for encoding in encodings:
+                try:
+                    with open(file_path, 'r', encoding=encoding) as f:
+                        content = f.read()
+                    break
+                except (UnicodeDecodeError, LookupError):
+                    continue
+            
+            if content is None:
+                # If all encodings fail, read as binary and decode with errors='ignore'
+                with open(file_path, 'rb') as f:
+                    content = f.read().decode('utf-8', errors='ignore')
             
             # Split by paragraphs or sentences
             lines = [line.strip() for line in content.split('\n') if line.strip()]
@@ -304,6 +318,40 @@ class HybridStorageManager:
         
         except Exception as e:
             print(f"Error processing JSON file: {e}")
+        
+        return nodes_created
+    
+    def process_pdf_file(self, file_path: str, file_name: str) -> int:
+        """Process a PDF file and create nodes from content"""
+        nodes_created = 0
+        
+        try:
+            from PyPDF2 import PdfReader
+            
+            with open(file_path, 'rb') as f:
+                pdf_reader = PdfReader(f)
+                
+                for page_num, page in enumerate(pdf_reader.pages):
+                    text = page.extract_text()
+                    
+                    # Split by paragraphs/lines
+                    lines = [line.strip() for line in text.split('\n') if line.strip()]
+                    
+                    for i, line in enumerate(lines):
+                        if len(line) > 10:  # Skip very short lines
+                            node_id = f"node-{len(self.get_all_nodes())}"
+                            embedding = [__import__('random').random() for _ in range(768)]
+                            metadata = {
+                                "source": "file_upload",
+                                "file_name": file_name,
+                                "page_number": page_num + 1,
+                                "line_index": i
+                            }
+                            self.add_node_to_vector_db(node_id, line, embedding, metadata)
+                            nodes_created += 1
+        
+        except Exception as e:
+            print(f"Error processing PDF file: {e}")
         
         return nodes_created
 
@@ -392,8 +440,8 @@ async def list_nodes(limit: int = 10):
 @app.post("/upload", response_model=FileUploadResponse, tags=["File Upload"])
 async def upload_file(file: UploadFile = File(...)):
     """
-    Upload a file (TXT, JSON, CSV, etc.) and automatically create nodes.
-    Supported formats: .txt, .json, .csv, .md
+    Upload a file (TXT, JSON, CSV, PDF, etc.) and automatically create nodes.
+    Supported formats: .txt, .json, .csv, .md, .pdf
     """
     upload_dir = "./rag_local/uploads"
     os.makedirs(upload_dir, exist_ok=True)
@@ -419,6 +467,9 @@ async def upload_file(file: UploadFile = File(...)):
         elif file_ext == '.csv':
             # Process CSV as text lines for now
             nodes_created = storage_manager.process_text_file(file_path, file.filename)
+        
+        elif file_ext == '.pdf':
+            nodes_created = storage_manager.process_pdf_file(file_path, file.filename)
         
         else:
             # Try to process as text
