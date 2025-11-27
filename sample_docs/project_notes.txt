@@ -1,0 +1,9 @@
+Alice Johnson is an Engineering Lead at Acme Corporation. She manages the stability and scaling projects, and works closely with Bob Smith who is the Product Manager. They collaborate on integrating new retrieval systems.
+
+Acme Corporation decided to implement a hybrid retrieval system combining ChromaDB for vector search and Neo4j for graph-based entity relationships. The project is funded by Diana Prince, the Chief Technology Officer at TechCorp.
+
+Charlie Brown, a Data Scientist from TechCorp, was brought in to design the data pipeline and ETL processes. Eve Wilson, an external contractor from Acme Corp's engineering team, is handling the infrastructure and deployment of Ollama on premise.
+
+The hybrid RAG system uses three main components: Ollama for local LLM inference, LightRAG for orchestration, and a combination of ChromaDB and Neo4j for storage. This architecture ensures data privacy and fast retrieval without relying on cloud services.
+
+Projects completed: Integration of NER (Named Entity Recognition) pipeline for extracting entities and relations from unstructured documents. Next phase involves adding support for structured data ingestion from CSV and JSON sources.

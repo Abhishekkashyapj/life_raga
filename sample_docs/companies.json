@@ -1,0 +1,18 @@
+[
+  {
+    "company_id": "acme-001",
+    "company_name": "Acme Corporation",
+    "founded": "2010",
+    "industry": "Software & Services",
+    "headquarters": "San Francisco, CA",
+    "employees": 500
+  },
+  {
+    "company_id": "tech-002",
+    "company_name": "TechCorp Inc",
+    "founded": "2015",
+    "industry": "AI & Machine Learning",
+    "headquarters": "New York, NY",
+    "employees": 300
+  }
+]

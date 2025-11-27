@@ -1,0 +1,3 @@
+Alice, Bob and Eve are employees at Acme Corporation. Alice is an engineering lead who manages the stability and scaling projects. Bob is a product manager focusing on the mobile team. Eve is an external contractor working on data ingestion.
+
+Acme Corporation decided to integrate a hybrid retrieval system combining a vector database (ChromaDB) and a graph database (Neo4j) to surface entities and relationships quickly.

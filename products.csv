@@ -1,0 +1,11 @@
+product_id,product_name,category,price,stock,manufacturer
+P001,Wireless Mouse,Electronics,29.99,150,TechGear
+P002,USB-C Cable,Electronics,12.99,500,CableMax
+P003,Monitor Stand,Office,45.99,75,DeskPro
+P004,Mechanical Keyboard,Electronics,89.99,120,KeyMaster
+P005,Desk Lamp,Office,34.99,200,LightWorks
+P006,Monitor Riser,Office,59.99,90,ErgoPro
+P007,Laptop Stand,Office,49.99,110,StandPro
+P008,USB Hub,Electronics,24.99,300,ConnectHub
+P009,Screen Protector,Electronics,15.99,400,ScreenGuard
+P010,Desk Organizer,Office,22.99,180,OrganzeMaster

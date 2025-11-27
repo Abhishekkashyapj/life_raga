@@ -1,0 +1,14 @@
+lightrag-hku[api]
+neo4j
+sentence-transformers
+unstructured[all-docs]
+tiktoken
+chromadb
+python-dotenv
+requests
+aiohttp
+
+# Testing
+pytest
+pytest-asyncio
+pytest-cov

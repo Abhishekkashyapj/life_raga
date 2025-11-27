@@ -1,0 +1,57 @@
+
+======================================================================
+Vector + Graph Hybrid Database API
+======================================================================
+
+[*] NODE & EDGE MANAGEMENT:
+  POST /nodes                    - Create node
+  GET  /nodes/{id}               - Get node
+  POST /edges                    - Create relationship
+
+[*] FILE UPLOAD:
+  POST /upload                   - Upload & process files
+
+[*] RETRIEVAL (3 MODES):
+  POST /retrieve/local           - Vector-only search
+  POST /retrieve/global          - Graph-only search
+  POST /retrieve/hybrid          - Hybrid search (BEST) **
+
+[*] LEGACY ENDPOINTS:
+  POST /search/vector            - Vector search
+  GET  /search/graph             - Graph traversal
+  POST /search/hybrid            - Hybrid search (old)
+
+[*] SYSTEM:
+  GET  /stats                    - System statistics
+  POST /demo/populate            - Load demo data
+
+[*] Supported file types: .txt, .json, .csv, .md
+[*] Docs: http://localhost:8001/docs
+======================================================================
+
+INFO:     127.0.0.1:54101 - "GET /stats HTTP/1.1" 200 OK
+Error processing text file: 'utf-8' codec can't decode byte 0x93 in position 10: invalid start byte
+INFO:     127.0.0.1:49690 - "POST /upload HTTP/1.1" 200 OK
+Error processing text file: 'utf-8' codec can't decode byte 0x93 in position 10: invalid start byte
+INFO:     127.0.0.1:55417 - "POST /upload HTTP/1.1" 200 OK
+Error processing text file: 'utf-8' codec can't decode byte 0x93 in position 10: invalid start byte
+INFO:     127.0.0.1:57831 - "POST /upload HTTP/1.1" 200 OK
+Error processing text file: 'utf-8' codec can't decode byte 0x93 in position 10: invalid start byte
+INFO:     127.0.0.1:57363 - "POST /upload HTTP/1.1" 200 OK
+Error processing text file: 'utf-8' codec can't decode byte 0x93 in position 10: invalid start byte
+INFO:     127.0.0.1:64209 - "POST /upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64209 - "GET /stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60661 - "OPTIONS /retrieve/hybrid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60661 - "POST /retrieve/hybrid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63688 - "POST /retrieve/hybrid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64798 - "GET /nodes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55151 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59402 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50789 - "GET /stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50794 - "GET /nodes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50552 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50591 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51233 - "GET /stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52582 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49701 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52669 - "GET / HTTP/1.1" 404 Not Found

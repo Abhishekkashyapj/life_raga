@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid Database - File Upload</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .upload-section {
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9ff;
+        }
+        
+        .upload-section:hover {
+            border-color: #764ba2;
+            background: #f0f1ff;
+        }
+        
+        .upload-section.dragover {
+            border-color: #764ba2;
+            background: #ede9ff;
+            transform: scale(1.02);
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .upload-text {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .upload-hint {
+            color: #999;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+        
+        #fileInput {
+            display: none;
+        }
+        
+        .file-info {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f7ff;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .file-info.show {
+            display: block;
+        }
+        
+        .file-name {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .file-size {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .btn-upload {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-upload:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-upload:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-clear {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-clear:hover {
+            background: #e0e0e0;
+        }
+        
+        .response-section {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .response-section.show {
+            display: block;
+        }
+        
+        .response-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .response-error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .response-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .response-item {
+            font-size: 13px;
+            margin: 5px 0;
+        }
+        
+        .spinner {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        .spinner.show {
+            display: block;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .supported-formats {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .supported-formats-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+        
+        .format-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .format-tag {
+            background: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📁 Upload Your Data</h1>
+        <p class="subtitle">Upload files to automatically create vector nodes and store them locally</p>
+        
+        <div class="upload-section" id="uploadSection">
+            <div class="upload-icon">📤</div>
+            <div class="upload-text">Drag & drop your file here</div>
+            <div class="upload-hint">or click to browse</div>
+            <input type="file" id="fileInput">
+        </div>
+        
+        <div class="file-info" id="fileInfo">
+            <div class="file-name" id="fileName"></div>
+            <div class="file-size" id="fileSize"></div>
+        </div>
+        
+        <div class="spinner" id="spinner"></div>
+        
+        <div class="button-group" id="buttonGroup" style="display: none;">
+            <button class="btn-upload" id="uploadBtn">Upload & Process</button>
+            <button class="btn-clear" id="clearBtn">Clear</button>
+        </div>
+        
+        <div class="response-section" id="responseSection">
+            <div class="response-title" id="responseTitle"></div>
+            <div id="responseContent"></div>
+        </div>
+        
+        <div class="supported-formats">
+            <div class="supported-formats-title">✓ SUPPORTED FORMATS</div>
+            <div class="format-list">
+                <div class="format-tag">📄 .txt</div>
+                <div class="format-tag">📋 .json</div>
+                <div class="format-tag">🗂️ .csv</div>
+                <div class="format-tag">📖 .md</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const uploadSection = document.getElementById('uploadSection');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const buttonGroup = document.getElementById('buttonGroup');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const responseSection = document.getElementById('responseSection');
+        const responseTitle = document.getElementById('responseTitle');
+        const responseContent = document.getElementById('responseContent');
+        const spinner = document.getElementById('spinner');
+        
+        let selectedFile = null;
+        
+        // Click to select file
+        uploadSection.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        // File selection
+        fileInput.addEventListener('change', (e) => {
+            handleFileSelect(e.files[0]);
+        });
+        
+        // Drag and drop
+        uploadSection.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadSection.classList.add('dragover');
+        });
+        
+        uploadSection.addEventListener('dragleave', () => {
+            uploadSection.classList.remove('dragover');
+        });
+        
+        uploadSection.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadSection.classList.remove('dragover');
+            handleFileSelect(e.dataTransfer.files[0]);
+        });
+        
+        function handleFileSelect(file) {
+            if (!file) return;
+            
+            selectedFile = file;
+            fileName.textContent = file.name;
+            fileSize.textContent = `Size: ${(file.size / 1024).toFixed(2)} KB`;
+            fileInfo.classList.add('show');
+            buttonGroup.style.display = 'flex';
+            responseSection.classList.remove('show');
+        }
+        
+        uploadBtn.addEventListener('click', async () => {
+            if (!selectedFile) return;
+            
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            
+            uploadBtn.disabled = true;
+            spinner.classList.add('show');
+            
+            try {
+                const response = await fetch('http://localhost:8001/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showSuccess(result);
+                } else {
+                    showError(result.detail || 'Upload failed');
+                }
+            } catch (error) {
+                showError('Connection error: Make sure the server is running on http://localhost:8001');
+            } finally {
+                uploadBtn.disabled = false;
+                spinner.classList.remove('show');
+            }
+        });
+        
+        clearBtn.addEventListener('click', () => {
+            selectedFile = null;
+            fileInput.value = '';
+            fileInfo.classList.remove('show');
+            buttonGroup.style.display = 'none';
+            responseSection.classList.remove('show');
+        });
+        
+        function showSuccess(result) {
+            responseSection.classList.add('show');
+            responseSection.classList.remove('response-error');
+            responseSection.classList.add('response-success');
+            
+            responseTitle.textContent = '✓ File uploaded successfully!';
+            responseContent.innerHTML = `
+                <div class="response-item"><strong>File:</strong> ${result.filename}</div>
+                <div class="response-item"><strong>Type:</strong> ${result.file_type}</div>
+                <div class="response-item"><strong>Status:</strong> ${result.status}</div>
+                <div class="response-item"><strong>Nodes Created:</strong> ${result.nodes_created}</div>
+                <div class="response-item"><strong>File Size:</strong> ${(result.size_bytes / 1024).toFixed(2)} KB</div>
+                <div class="response-item"><strong>Stored at:</strong> ${result.location}</div>
+            `;
+        }
+        
+        function showError(error) {
+            responseSection.classList.add('show');
+            responseSection.classList.add('response-error');
+            responseSection.classList.remove('response-success');
+            
+            responseTitle.textContent = '✗ Upload failed';
+            responseContent.innerHTML = `<div class="response-item">${error}</div>`;
+        }
+    </script>
+</body>
+</html>

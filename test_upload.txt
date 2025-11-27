@@ -1,0 +1,10 @@
+This is a test document for file upload functionality.
+The backend can now accept any text file and automatically process it.
+Each line becomes a node in the vector database.
+Files are stored locally in the ./rag_local/uploads/ directory.
+This enables users to upload data without internet connectivity.
+The system works completely offline after the initial server start.
+All data persists locally on the user's machine.
+Vector embeddings are created automatically for each line.
+Graph relationships can be created between uploaded nodes.
+Hybrid search works across uploaded data.

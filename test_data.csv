@@ -1,0 +1,11 @@
+name,title,company,email,department,salary,years_experience
+John Wilson,Senior Developer,TechVision Inc,john.wilson@techvision.com,Engineering,125000,8
+Sarah Chen,Product Manager,DataFlow Systems,sarah.chen@dataflow.com,Product,115000,6
+Michael Roberts,DevOps Engineer,CloudNine,michael.r@cloudnine.com,Infrastructure,130000,7
+Emma Thompson,UX Designer,CreativeStudio,emma.t@creativestudio.com,Design,95000,5
+Alex Kumar,Data Scientist,InsightAI,alex.kumar@insightai.com,Analytics,120000,4
+Jessica Lee,QA Lead,QualityFirst,jessica.lee@qualityfirst.com,Quality,105000,9
+David Martin,Solutions Architect,EnterprisePro,david.martin@enterprisepro.com,Architecture,140000,12
+Lisa Anderson,Marketing Manager,BrandBoost,lisa.a@brandboost.com,Marketing,100000,6
+Carlos Gomez,Backend Engineer,APICore,carlos.g@apicore.com,Engineering,118000,5
+Nina Patel,HR Director,PeoplePlus,nina.patel@peopleplus.com,Human Resources,110000,10

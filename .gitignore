@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+rag_local/
+.env
+*.pyc
+venv/
+node_modules/

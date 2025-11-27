@@ -1,0 +1,4 @@
+﻿This is a test document for the Hybrid RAG system.
+Machine learning is a subset of artificial intelligence.
+Neural networks are inspired by biological systems.
+Deep learning uses multiple layers of neural networks.
